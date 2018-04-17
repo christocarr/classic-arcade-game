@@ -1,11 +1,11 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-	
+	this.speed = speed;
 	this.x = x;
 	this.y = y; 
   this.sprite = 'images/enemy-bug.png';
@@ -17,6 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+	this.speed = this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -41,14 +42,27 @@ Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function() {
-	
+Player.prototype.handleInput = function(key) {
+	switch(key) {
+		case 'left':
+			this.x -= 100;
+			break;
+		case 'right':
+			this.x += 100;
+			break;
+		case 'down':
+			this.y += 85;
+			break;
+		case 'up':
+			this.y -= 85;
+			break;
+	}
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(100, 100), new Enemy(5, 50)];
+const allEnemies = [new Enemy(100, 130), new Enemy(5, 50), new Enemy(5, 215)];
 
 const player = new Player(200, 400);
 
@@ -61,6 +75,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
