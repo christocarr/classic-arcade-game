@@ -17,7 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-	this.speed = this.speed * dt;
+	this.x = this.x + (this.speed * dt);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -43,28 +43,48 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(key) {
-	switch(key) {
-		case 'left':
-			this.x -= 100;
-			break;
-		case 'right':
-			this.x += 100;
-			break;
-		case 'down':
-			this.y += 85;
-			break;
-		case 'up':
-			this.y -= 85;
-			break;
+	const BOUNDRY_X_MIN = 0;
+	const BOUNDRY_X_MAX = 400;
+	const BOUNDRY_Y_MIN = -35;
+	const BOUNDRY_Y_MAX = 390;
+
+	if (key === 'left' && this.x > 0) {
+		this.x -= 100;
+	} else if (key === 'right' && this.x < 400) {
+		this.x += 100;
+	} else if (key === 'up' && this.y > -35) {
+		this.y -= 85;
+	} else if (key === 'down' && this.y < 390) {
+		this.y += 85;
 	}
+//	switch(key) {
+//		case 'left' :
+//			this.x -= 100;
+//			console.log('x is :' + this.x);
+//			break;
+//		case BOUNDRY_X_MAX > this.x:	
+//		case 'right':
+//			this.x += 100;
+//			console.log('x is :' + this.x);
+//			break;
+//		case 'down':
+//			this.y += 85;
+//			console.log('y is :' + this.y);
+//			break;
+//		case 'up':
+//			this.y -= 85;
+//			console.log('y is :' + this.y);
+//			break;
+//	}
+	
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(100, 130), new Enemy(5, 50), new Enemy(5, 215)];
+const allEnemies = [new Enemy(0, 130, 60), new Enemy(0, 50, 60), new Enemy(5, 215)];
 
-const player = new Player(200, 400);
+const player = new Player(400, 390);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
