@@ -16,8 +16,12 @@ var Enemy = function(x, y, speed) {
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers.
+    // all computers.	
+	//loop enemy when it reaches end of boundry
 	this.x = this.x + (this.speed * dt);
+	if (this.x > 500) {
+		this.x = -100;
+	}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -43,11 +47,7 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(key) {
-	const BOUNDRY_X_MIN = 0;
-	const BOUNDRY_X_MAX = 400;
-	const BOUNDRY_Y_MIN = -35;
-	const BOUNDRY_Y_MAX = 390;
-
+	//check if player is within boundries
 	if (key === 'left' && this.x > 0) {
 		this.x -= 100;
 	} else if (key === 'right' && this.x < 400) {
@@ -57,32 +57,14 @@ Player.prototype.handleInput = function(key) {
 	} else if (key === 'down' && this.y < 390) {
 		this.y += 85;
 	}
-//	switch(key) {
-//		case 'left' :
-//			this.x -= 100;
-//			console.log('x is :' + this.x);
-//			break;
-//		case BOUNDRY_X_MAX > this.x:	
-//		case 'right':
-//			this.x += 100;
-//			console.log('x is :' + this.x);
-//			break;
-//		case 'down':
-//			this.y += 85;
-//			console.log('y is :' + this.y);
-//			break;
-//		case 'up':
-//			this.y -= 85;
-//			console.log('y is :' + this.y);
-//			break;
-//	}
+
 	
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(0, 130, 60), new Enemy(0, 50, 60), new Enemy(5, 215)];
+const allEnemies = [new Enemy(0, 130, 60)];
 
 const player = new Player(400, 390);
 
