@@ -2,12 +2,11 @@
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
 	this.speed = speed;
 	this.x = x;
 	this.y = y; 
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
 };
 
@@ -22,6 +21,14 @@ Enemy.prototype.update = function(dt) {
 	if (this.x > 500) {
 		this.x = -100;
 	}
+	
+	//collision detection
+	enemyBox = {x: this.x, y: this.y};
+  playerBox = {x: player.x, y: player.y};
+    if ((enemyBox.x < (playerBox.x + 50)) && ((enemyBox.x + 75) > playerBox.x) && (enemyBox.y < (playerBox.y + 63)) && ((77 + enemyBox.y) > playerBox.y)) {
+   
+      setTimeout(player.reset(), 10000);
+    };
 };
 
 // Draw the enemy on the screen, required method for game
@@ -39,11 +46,17 @@ const Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-	
+		
 };
 
 Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+//reset player to original starting location when collisions happen
+Player.prototype.reset =function() {
+	this.x = 200;
+	this.y = 400;
 };
 
 Player.prototype.handleInput = function(key) {
@@ -57,16 +70,15 @@ Player.prototype.handleInput = function(key) {
 	} else if (key === 'down' && this.y < 390) {
 		this.y += 85;
 	}
-
 	
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(0, 130, 60)];
+const allEnemies = [new Enemy(0, 130, 60), new Enemy (0, 220, 120), new Enemy(120, 55, 120)];
 
-const player = new Player(400, 390);
+const player = new Player(200, 390);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
