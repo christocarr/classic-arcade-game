@@ -4,7 +4,13 @@ The third project in Udacity's Front End Nanodegree.
 
 ## Build Status
 
-Basic functionality complete. Win counter to be implemented.
+Basic functionality complete.
+
+### TODO
+
+* ~~Win counter~~
+* Gem collection with gem counter
+* Timer
 
 ## Installation
 
