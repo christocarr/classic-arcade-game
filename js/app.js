@@ -23,11 +23,10 @@ Enemy.prototype.update = function(dt) {
 	}
 	
 	//collision detection
-	enemyBox = {x: this.x, y: this.y};
-  playerBox = {x: player.x, y: player.y};
-    if ((enemyBox.x < (playerBox.x + 50)) && ((enemyBox.x + 75) > playerBox.x) && (enemyBox.y < (playerBox.y + 63)) && ((77 + enemyBox.y) > playerBox.y)) {
-   
-      setTimeout(player.reset(), 10000);
+	enemyArea = {x: this.x, y: this.y};
+  playerArea = {x: player.x, y: player.y};
+    if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && (enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
+      setTimeout(player.reset(), 1000);
     };
 };
 
@@ -59,6 +58,11 @@ Player.prototype.reset =function() {
 	this.y = 400;
 };
 
+//function to run when the player reaches the water which shows a win message
+Player.prototype.winMessage = function() {
+	console.log('player wins');
+}
+
 Player.prototype.handleInput = function(key) {
 	//check if player is within boundries
 	if (key === 'left' && this.x > 0) {
@@ -69,6 +73,11 @@ Player.prototype.handleInput = function(key) {
 		this.y -= 85;
 	} else if (key === 'down' && this.y < 390) {
 		this.y += 85;
+	}
+	
+	console.log(this.y);
+	if (this.y < 50) {
+		player.winMessage();
 	}
 	
 };
@@ -91,3 +100,12 @@ document.addEventListener('keyup', function(e) {
     };
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+//Custom functionality
+const Gem = function(x, y) {
+	this.x = x;
+	this.y = y;
+	this.sprite = 'images/Gem-Orange.png';
+}
+
+const gem = new Gem(200, 100);

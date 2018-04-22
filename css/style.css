@@ -1,3 +1,10 @@
 body {
-    text-align: center;
+  text-align: center;
+	font-family: sans-serif;
+}
+
+.game-stats {
+	margin: 0 0 0 0;
+	height: 10vh;
+	width: 100vw;
 }

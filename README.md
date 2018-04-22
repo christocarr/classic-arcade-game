@@ -4,7 +4,7 @@ The third project in Udacity's Front End Nanodegree.
 
 ## Build Status
 
-Not complete.
+Basic functionality complete. Win counter to be implemented.
 
 ## Installation
 
@@ -12,4 +12,4 @@ Simply clone or download the files and folders to your local machine and run the
 
 ## Instructions
 
-The aim of the game is to guide the avatar to the water while dodging the enemies. Your avatar will start on the grass. By pressing the left, up, right, and down keys you can move the avatar one block at a time. 
+The aim of the game is to guide the avatar to the water while dodging the enemies. Your avatar will start on the grass. By pressing the left, up, right, and down keys you can guide the avatar one block at a time. 
