@@ -38,10 +38,11 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-const Player = function(x, y) {
+const Player = function(x, y, counter) {
 	this.x = x;
 	this.y = y;
 	this.sprite = 'images/char-boy.png';
+	this.counter = counter;
 };
 
 Player.prototype.update = function(dt) {
@@ -53,14 +54,17 @@ Player.prototype.render = function() {
 };
 
 //reset player to original starting location when collisions happen
-Player.prototype.reset =function() {
+Player.prototype.reset = function() {
 	this.x = 200;
 	this.y = 400;
 };
 
 //function to run when the player reaches the water which shows a win message
-Player.prototype.winMessage = function() {
-	console.log('player wins');
+Player.prototype.wins = function(counter) {
+	let winCounter = document.querySelector('.wins');
+	this.counter ++; 
+	winCounter.innerHTML = `Wins: ${this.counter}`;
+	player.reset();
 }
 
 Player.prototype.handleInput = function(key) {
@@ -75,9 +79,8 @@ Player.prototype.handleInput = function(key) {
 		this.y += 85;
 	}
 	
-	console.log(this.y);
 	if (this.y < 50) {
-		player.winMessage();
+		player.wins();
 	}
 	
 };
@@ -87,7 +90,7 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 const allEnemies = [new Enemy(0, 130, 60), new Enemy (0, 220, 120), new Enemy(120, 55, 120)];
 
-const player = new Player(200, 390);
+const player = new Player(200, 390, 0);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
