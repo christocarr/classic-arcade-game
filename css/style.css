@@ -4,7 +4,8 @@ body {
 }
 
 .game-stats {
-	margin: 0 0 0 0;
-	height: 10vh;
-	width: 100vw;
+	margin: 2em auto 0 auto;
+	height: 5vh;
+	width: 90vw;
+	
 }
