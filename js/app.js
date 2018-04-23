@@ -18,6 +18,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.	
 	//loop enemy when it reaches end of boundry
 	this.x = this.x + (this.speed * dt);
+	
 	if (this.x > 500) {
 		this.x = -100;
 	}
@@ -26,7 +27,8 @@ Enemy.prototype.update = function(dt) {
 	enemyArea = {x: this.x, y: this.y};
   playerArea = {x: player.x, y: player.y};
     if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && (enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
-      setTimeout(player.reset(), 1000);
+      player.counter = 0;
+			setTimeout(player.reset(), 1000);
     };
 };
 
@@ -46,7 +48,10 @@ const Player = function(x, y, counter) {
 };
 
 Player.prototype.update = function(dt) {
-		
+	if (this.y < 50) {
+		player.winCounter();
+	}
+	
 };
 
 Player.prototype.render = function() {
@@ -57,10 +62,17 @@ Player.prototype.render = function() {
 Player.prototype.reset = function() {
 	this.x = 200;
 	this.y = 400;
+	
+	//if player is hit then reset the counter
+	if (player.counter === 0) {
+		let winCounter = document.querySelector('.wins'); 
+		winCounter.innerHTML = `Wins: ${this.counter}`;
+	}
+	
 };
 
 //function to run when the player reaches the water which shows a win message
-Player.prototype.wins = function(counter) {
+Player.prototype.winCounter = function(counter) {
 	let winCounter = document.querySelector('.wins');
 	this.counter ++; 
 	winCounter.innerHTML = `Wins: ${this.counter}`;
@@ -78,11 +90,6 @@ Player.prototype.handleInput = function(key) {
 	} else if (key === 'down' && this.y < 390) {
 		this.y += 85;
 	}
-	
-	if (this.y < 50) {
-		player.wins();
-	}
-	
 };
 
 // Now instantiate your objects.
@@ -105,10 +112,15 @@ document.addEventListener('keyup', function(e) {
 });
 
 //Custom functionality
+//Gems
 const Gem = function(x, y) {
 	this.x = x;
 	this.y = y;
 	this.sprite = 'images/Gem-Orange.png';
+}
+
+Gem.prototype.render = function() {
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 const gem = new Gem(200, 100);
