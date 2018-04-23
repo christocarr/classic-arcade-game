@@ -28,7 +28,8 @@ Enemy.prototype.update = function(dt) {
   playerArea = {x: player.x, y: player.y};
     if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && (enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
       player.counter = 0;
-			setTimeout(player.reset(), 1);
+			setTimeout(function() {
+				player.reset()}, 200);
     };
 };
 
@@ -65,7 +66,7 @@ Player.prototype.reset = function() {
 	
 	//if player is hit then reset the counter
 	if (player.counter === 0) {
-		let scoreCounter = document.querySelector('.wins'); 
+		let scoreCounter = document.querySelector('.score'); 
 		scoreCounter.innerHTML = `Score: ${this.counter}`;
 	}
 	
@@ -76,7 +77,7 @@ Player.prototype.scoreCounter = function(counter) {
 	let scoreCounter = document.querySelector('.score');
 	this.counter += 10; 
 	scoreCounter.innerHTML = `Score: ${this.counter}`;
-	player.reset();
+	player.reset() 
 }
 
 Player.prototype.handleInput = function(key) {
