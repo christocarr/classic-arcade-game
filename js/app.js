@@ -28,7 +28,7 @@ Enemy.prototype.update = function(dt) {
   playerArea = {x: player.x, y: player.y};
     if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && (enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
       player.counter = 0;
-			setTimeout(player.reset(), 1000);
+			setTimeout(player.reset(), 1);
     };
 };
 
@@ -49,7 +49,7 @@ const Player = function(x, y, counter) {
 
 Player.prototype.update = function(dt) {
 	if (this.y < 50) {
-		player.winCounter();
+		player.scoreCounter();
 	}
 	
 };
@@ -65,17 +65,17 @@ Player.prototype.reset = function() {
 	
 	//if player is hit then reset the counter
 	if (player.counter === 0) {
-		let winCounter = document.querySelector('.wins'); 
-		winCounter.innerHTML = `Wins: ${this.counter}`;
+		let scoreCounter = document.querySelector('.wins'); 
+		scoreCounter.innerHTML = `Score: ${this.counter}`;
 	}
 	
 };
 
-//function to run when the player reaches the water which shows a win message
-Player.prototype.winCounter = function(counter) {
-	let winCounter = document.querySelector('.wins');
-	this.counter ++; 
-	winCounter.innerHTML = `Wins: ${this.counter}`;
+//function to run when the player reaches the water which adds to score counter 
+Player.prototype.scoreCounter = function(counter) {
+	let scoreCounter = document.querySelector('.score');
+	this.counter += 10; 
+	scoreCounter.innerHTML = `Score: ${this.counter}`;
 	player.reset();
 }
 
