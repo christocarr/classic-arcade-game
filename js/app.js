@@ -1,3 +1,4 @@
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -7,7 +8,7 @@ var Enemy = function(x, y, speed) {
 	this.y = y; 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-  this.sprite = 'images/enemy-bug.png';
+	this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
@@ -26,7 +27,7 @@ Enemy.prototype.update = function(dt) {
 	//collision detection
 	enemyArea = {x: this.x, y: this.y};
   playerArea = {x: player.x, y: player.y};
-    if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && (enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
+    if ((enemyArea.x < (playerArea.x + 50)) && ((enemyArea.x + 75) > playerArea.x) && 	(enemyArea.y < (playerArea.y + 63)) && ((77 + enemyArea.y) > playerArea.y)) {
       player.counter = 0;
 			setTimeout(function() {
 				player.reset()}, 200);
@@ -50,7 +51,7 @@ const Player = function(x, y, counter) {
 
 Player.prototype.update = function(dt) {
 	if (this.y < 50) {
-		player.scoreCounter();
+		this.scoreCounter();
 	}
 	
 };
@@ -65,7 +66,7 @@ Player.prototype.reset = function() {
 	this.y = 400;
 	
 	//if player is hit then reset the counter
-	if (player.counter === 0) {
+	if (this.counter === 0) {
 		let scoreCounter = document.querySelector('.score'); 
 		scoreCounter.innerHTML = `Score: ${this.counter}`;
 	}
@@ -77,7 +78,7 @@ Player.prototype.scoreCounter = function(counter) {
 	let scoreCounter = document.querySelector('.score');
 	this.counter += 10; 
 	scoreCounter.innerHTML = `Score: ${this.counter}`;
-	player.reset() 
+	this.reset() 
 }
 
 Player.prototype.handleInput = function(key) {
@@ -96,7 +97,7 @@ Player.prototype.handleInput = function(key) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(0, 130, 60), new Enemy (0, 220, 120), new Enemy(120, 55, 120)];
+const allEnemies = [new Enemy(0, 130, 60), new Enemy (0, 220, 120), new Enemy(120, 55, 180)];
 
 const player = new Player(200, 390, 0);
 
@@ -125,3 +126,4 @@ Gem.prototype.render = function() {
 }
 
 const gem = new Gem(200, 100);
+
